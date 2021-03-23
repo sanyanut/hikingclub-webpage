@@ -1,0 +1,281 @@
+$backgroundsColors: (
+    section: $sectionBackgroundColor,
+    main: $backgroundColor,
+    content: $contentBackgroundColor,
+    banner: $bannerGradientBackground,
+);
+
+@function bgColor($key) {
+    @if map-has-key($backgroundsColors, $key) {
+        @return map-get($backgroundsColors, $key);
+    }
+    @warn "Can't find `#{$key}` in $bgColor.";
+    @return null;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Hind", sans-serif;
+    background-color: bgColor(main);
+
+    @mixin join-button {
+        background-color: $joinUsButtonColor;
+        border: none;
+        font-size: 18px;
+        color: white;
+        width: 140px;
+        height: 45px;
+        font-weight: bold;
+        border-radius: 4%;
+        cursor: pointer;
+    }
+
+    @mixin landing-logo {
+        display: flex;
+        padding-top: 1em;
+        img {
+            width: 45px;
+            height: 45px;
+        }
+        p {
+            display: flex;
+            flex-direction: column;
+            margin: 0.2em 0 0 0.8em;
+            font-weight: bold;
+            font-size: 1.5em;
+            line-height: 1em;
+            span {
+                font-size: 10px;
+                padding-left: 7px;
+            }
+        }
+    }
+
+    .header {
+        background: $backgroundImg;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 600px;
+        background-position: 25% 55%;
+        border-radius: 0 0 42% 0;
+        color: $mainFontColor;
+
+        .header-wrap {
+            margin-left: 10%;
+
+            .landing-logo {
+                display: flex;
+                padding-top: 1em;
+
+                img {
+                    width: 45px;
+                    height: 45px;
+                }
+                p {
+                    display: flex;
+                    flex-direction: column;
+                    margin: 0.2em 0 0 0.8em;
+                    font-weight: bold;
+                    font-size: 1.5em;
+                    line-height: 1em;
+                    span {
+                        font-size: 10px;
+                        padding-left: 7px;
+                    }
+                }
+            }
+            .header_heading {
+                width: 8em;
+                font-size: 70px;
+                font-weight: bold;
+                line-height: 1em;
+                margin: 0.4em 0 0.4em 0;
+                z-index: 1;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 10px;
+                    left: 0;
+                    height: 45px;
+                    width: 292px;
+                    background-color: $textHighlighter;
+                    z-index: -1;
+                }
+            }
+
+            .header_text {
+                width: 38em;
+                margin-bottom: 4em;
+            }
+
+            .header_button {
+                @include join-button;
+            }
+
+            .login {
+                color: white;
+                font-size: 20px;
+                padding-left: 8em;
+            }
+        }
+    }
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: bgColor(main);
+
+        .section_text {
+            color: $mainFontColor;
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 20px;
+                left: 53%;
+                height: 50px;
+                width: 194px;
+                background-color: $textHighlighter;
+                z-index: -1;
+            }
+        }
+
+        .section_card_wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 200px;
+
+            .section_card {
+                display: flex;
+                flex-direction: row;
+                width: 65%;
+                height: 325px;
+                background-color: bgColor(section);
+                margin-bottom: 2em;
+                color: white;
+                border-radius: 1em;
+
+                img {
+                    border-radius: 2%;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 1em;
+                    width: 460px;
+                    height: auto;
+                }
+
+                .section_card_right_container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 65%;
+                    margin: 0 1em 0 3em;
+
+                    .section_card_heading {
+                        text-align: center;
+                        font-size: 26px;
+                        font-weight: bold;
+                    }
+
+                    .section_link {
+                        color: $sectionTextColor;
+                    }
+
+                    .section_card_text {
+                        width: 30em;
+                        @extend .section_link;
+                    }
+                }
+            }
+        }
+
+        .section_banner {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 70%;
+            height: 130px;
+            border-radius: 0.5em;
+            background: bgColor(banner);
+            margin-top: -70px;
+            margin-bottom: -70px;
+
+            .section_banner_text_wrap {
+                .section_banner_heading {
+                    color: $mainFontColor;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                    position: relative;
+                    z-index: 1;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 5px;
+                        left: 30.5%;
+                        height: 40px;
+                        width: 50px;
+                        background-color: $textHighlighter;
+                        z-index: -1;
+                    }
+                }
+
+                .section_banner_text {
+                    color: $sectionBannerText;
+                    margin-top: 0;
+                    margin-bottom: 2em;
+                }
+            }
+        }
+        .section_banner_button {
+            @include join-button;
+            margin-left: 30%;
+        }
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        background: bgColor(section);
+        color: $sectionBannerText;
+        height: 240px;
+
+        .footer-wrap {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 3em;
+
+            .footer_logo {
+                @include landing-logo;
+                padding-right: 2em;
+            }
+
+            .footer_text {
+                font-size: 14px;
+                width: 300px;
+            }
+
+            .footer-cr {
+                margin-top: 3em;
+            }
+        }
+    }
+}
